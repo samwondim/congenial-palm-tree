@@ -14,27 +14,13 @@ const generateSlug = (name1: string, name2: string) => {
   return combined.replace(/[^a-z0-9]/g, "-").replace(/-+/g, "-");
 };
 
-interface WizardSession {
-  name1?: string;
-  name2?: string;
-  weddingDate?: string;
-  coupleId?: string;
-  slug?: string;
-  venueCeremonyName?: string;
-  venueCeremonyAddress?: string;
-  venueCeremonyTime?: string;
-  venueReceptionName?: string;
-  venueReceptionAddress?: string;
-  venueReceptionTime?: string;
-}
-
-const createWeddingScene = new Scenes.WizardScene<WizardSession>(
+const createWeddingScene = new Scenes.WizardScene(
   "create-wedding",
-  (ctx) => {
+  (ctx: any) => {
     ctx.reply("💍 Welcome to Wedding Builder! Let's create your wedding site.\n\nFirst, what's the first partner's name? (e.g., Sarah)");
     return ctx.wizard.next();
   },
-  (ctx) => {
+  (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid name.");
       return;
@@ -43,7 +29,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply(`Great! And the second partner's name? (e.g., James)`);
     return ctx.wizard.next();
   },
-  (ctx) => {
+  (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid name.");
       return;
@@ -52,14 +38,14 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply(`Perfect! ${ctx.session.name1} & ${ctx.session.name2} 💕\n\nWhat's your wedding date? (format: YYYY-MM-DD, e.g., 2026-09-15)`);
     return ctx.wizard.next();
   },
-  async (ctx) => {
+  async (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid date.");
       return;
     }
     ctx.session.weddingDate = ctx.message.text.trim();
     
-    const slug = generateSlug(ctx.session.name1!, ctx.session.name2!);
+    const slug = generateSlug(ctx.session.name1, ctx.session.name2);
     
     const { data, error } = await supabase
       .from("couples")
@@ -85,7 +71,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply("Almost done! What's the ceremony venue name? (e.g., St. Mary's Cathedral)");
     return ctx.wizard.next();
   },
-  (ctx) => {
+  (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid venue name.");
       return;
@@ -94,7 +80,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply("And the ceremony venue address? (e.g., 123 Church Street, San Francisco, CA)");
     return ctx.wizard.next();
   },
-  (ctx) => {
+  (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid address.");
       return;
@@ -103,7 +89,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply("What time is the ceremony? (e.g., 2:00 PM)");
     return ctx.wizard.next();
   },
-  async (ctx) => {
+  async (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid time.");
       return;
@@ -135,7 +121,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply("What's the reception venue name? (e.g., The Grand Ballroom)");
     return ctx.wizard.next();
   },
-  (ctx) => {
+  (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid venue name.");
       return;
@@ -144,7 +130,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply("And the reception venue address?");
     return ctx.wizard.next();
   },
-  (ctx) => {
+  (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid address.");
       return;
@@ -153,7 +139,7 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
     ctx.reply("What time is the reception? (e.g., 5:00 PM)");
     return ctx.wizard.next();
   },
-  async (ctx) => {
+  async (ctx: any) => {
     if (!ctx.message || !ctx.message.text) {
       ctx.reply("Please enter a valid time.");
       return;
@@ -195,12 +181,12 @@ const createWeddingScene = new Scenes.WizardScene<WizardSession>(
   }
 );
 
-const stage = new Scenes.Stage<WizardSession>([createWeddingScene]);
+const stage = new Scenes.Stage([createWeddingScene]);
 
 bot.use(session());
 bot.use(stage.middleware());
 
-bot.start((ctx) => {
+bot.start((ctx: any) => {
   ctx.reply(
     "💍 Welcome to Wedding Builder!\n\n" +
     "I help you create a beautiful wedding website.\n\n" +
@@ -211,11 +197,11 @@ bot.start((ctx) => {
   );
 });
 
-bot.command("start", (ctx) => {
+bot.command("start", (ctx: any) => {
   ctx.scene.enter("create-wedding");
 });
 
-bot.command("help", (ctx) => {
+bot.command("help", (ctx: any) => {
   ctx.reply(
     "Need help? Here's how to use Wedding Builder:\n\n" +
     "1. Run /start to create a new wedding site\n" +
@@ -226,7 +212,7 @@ bot.command("help", (ctx) => {
   );
 });
 
-bot.catch((err, ctx) => {
+bot.catch((err: any, ctx: any) => {
   console.error("Bot error:", err);
   ctx.reply("Something went wrong. Please try again or use /start.");
 });
