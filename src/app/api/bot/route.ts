@@ -1,13 +1,22 @@
 import { Telegraf, Scenes, session } from "telegraf";
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-const supabase = createClient(supabaseUrl!, supabaseKey!);
+function getSupabase() {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+  if (!supabaseUrl || !supabaseKey) {
+    throw new Error("Missing Supabase env vars");
+  }
+  return createClient(supabaseUrl, supabaseKey);
+}
 
-const BOT_TOKEN = process.env.BOT_TOKEN;
-
-const bot = new Telegraf(BOT_TOKEN!);
+function getBot() {
+  const botToken = process.env.BOT_TOKEN;
+  if (!botToken) {
+    throw new Error("Missing BOT_TOKEN");
+  }
+  return new Telegraf(botToken);
+}
 
 const generateSlug = (name1: string, name2: string) => {
   const combined = `${name1}-${name2}`.toLowerCase();
@@ -46,6 +55,7 @@ const createWeddingScene = new Scenes.WizardScene(
     ctx.session.weddingDate = ctx.message.text.trim();
     
     const slug = generateSlug(ctx.session.name1, ctx.session.name2);
+    const supabase = getSupabase();
     
     const { data, error } = await supabase
       .from("couples")
@@ -95,6 +105,7 @@ const createWeddingScene = new Scenes.WizardScene(
       return;
     }
     ctx.session.venueCeremonyTime = ctx.message.text.trim();
+    const supabase = getSupabase();
     
     await supabase
       .from("couples")
@@ -145,6 +156,7 @@ const createWeddingScene = new Scenes.WizardScene(
       return;
     }
     ctx.session.venueReceptionTime = ctx.message.text.trim();
+    const supabase = getSupabase();
     
     await supabase
       .from("couples")
@@ -183,6 +195,7 @@ const createWeddingScene = new Scenes.WizardScene(
 
 const stage = new Scenes.Stage([createWeddingScene]);
 
+const bot = getBot();
 bot.use(session());
 bot.use(stage.middleware());
 
