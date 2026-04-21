@@ -1,0 +1,67 @@
+export const weddingData = {
+  couple: {
+    name1: "Sarah",
+    name2: "James",
+    lastName: "Morrison",
+  },
+  date: "2026-09-15",
+  venues: {
+    ceremony: {
+      name: "St. Mary's Cathedral",
+      address: "123 Church Street, Downtown",
+      city: "San Francisco, CA 94102",
+      time: "2:00 PM",
+      description: "Join us for our ceremony in the beautiful historic cathedral.",
+    },
+    reception: {
+      name: "The Grand Ballroom",
+      address: "456 Vineyard Lane, Napa",
+      city: "Napa, CA 94558",
+      time: "5:00 PM",
+      description: "Celebrate with us at this stunning vineyard venue.",
+    },
+  },
+  schedule: [
+    { time: "2:00 PM", event: "Ceremony", location: "St. Mary's Cathedral", description: "The moment we've been waiting for" },
+    { time: "3:30 PM", event: "Cocktail Hour", location: "Grand Ballroom Garden", description: "Enjoy drinks and hors d'oeuvres" },
+    { time: "5:00 PM", event: "Reception Begins", location: "Grand Ballroom", description: "First dance and welcome" },
+    { time: "6:00 PM", event: "Dinner", location: "Grand Ballroom", description: "Three course dinner" },
+    { time: "7:30 PM", event: "Speeches & Toasts", location: "Grand Ballroom", description: "Friends and family share their love" },
+    { time: "8:30 PM", event: "First Dance", location: "Grand Ballroom", description: "Our first dance as a married couple" },
+    { time: "9:00 PM", event: "Party!", location: "Grand Ballroom", description: "Dance the night away" },
+  ],
+  story: [
+    { year: "2018", title: "We Met", description: "A mutual friend's birthday party brought us together. Sarah almost didn't go that night, but something told her to stay." },
+    { year: "2019", title: "First Date", description: "Coffee at the local bookstore turned into a 5-hour conversation. We both knew this was special." },
+    { year: "2020", title: "Moved In Together", description: "During the pandemic, we took the leap and moved in together. Best decision ever." },
+    { year: "2023", title: "The Proposal", description: "James planned a surprise trip to our favorite beach. Under the stars, he got down on one knee." },
+    { year: "2026", title: "The Wedding", description: "And now, we're ready to start this next chapter of our lives together." },
+  ],
+  photos: [
+    { id: 1, src: "https://images.unsplash.com/photo-1519741497674-611481863552?w=800", alt: "Couple in wedding attire", category: "engagement" },
+    { id: 2, src: "https://images.unsplash.com/photo-1511285560982-1356c11d4606?w=800", alt: "Wedding rings", category: "details" },
+    { id: 3, src: "https://images.unsplash.com/photo-1465495976277-4387d4b0b4c6?w=800", alt: "Couple walking", category: "engagement" },
+    { id: 4, src: "https://images.unsplash.com/photo-1469371670807-013ccf25f16a?w=800", alt: "Wedding flowers", category: "details" },
+    { id: 5, src: "https://images.unsplash.com/photo-1522673607200-1645062cd958?w=800", alt: "Couple portrait", category: "portrait" },
+    { id: 6, src: "https://images.unsplash.com/photo-1529636798458-92182e662485?w=800", alt: "Wedding cake", category: "details" },
+  ],
+  faq: [
+    { question: "What is the dress code?", answer: "We kindly ask our guests to wear formal attire. Think elegant cocktail dresses for ladies and suits for gentlemen." },
+    { question: "Is there parking available?", answer: "Yes, both venues have complimentary parking. Valet will be available at the reception." },
+    { question: "Can I bring a plus one?", answer: "Only those named on the invitation are welcome. We hope you understand!" },
+    { question: "Are children welcome?", answer: "While we love your little ones, our wedding will be an adult-only celebration. We hope you enjoy a night out!" },
+    { question: "What about dietary restrictions?", answer: "Please indicate any dietary restrictions on your RSVP card. We will have options for vegetarians, vegans, and gluten-free guests." },
+    { question: "What if it's raining?", answer: "Both venues have beautiful indoor options, so we're covered no matter the weather!" },
+  ],
+  registry: [
+    { name: "Crate & Barrel", url: "https://www.crateandbarrel.com" },
+    { name: "Williams Sonoma", url: "https://www.williams-sonoma.com" },
+    { name: "REI", url: "https://www.rei.com" },
+    { name: "Honeymoon Fund", url: "#" },
+  ],
+  accommodations: [
+    { name: "The Ritz-Carlton", distance: "5 min", phone: "(555) 123-4567" },
+    { name: "Marriott Downtown", distance: "10 min", phone: "(555) 234-5678" },
+    { name: "Airbnb Options", distance: "Various", phone: "airbnb.com" },
+  ],
+};
